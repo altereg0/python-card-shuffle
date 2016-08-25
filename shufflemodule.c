@@ -375,6 +375,15 @@ static PyMethodDef ShuffleMethods[] = {
 	{NULL, NULL, 0, NULL}
 };
 
-void initshuffle(void){
-	(void) Py_InitModule("shuffle", ShuffleMethods);
-}
+static struct PyModuleDef cModPyShuffle = {
+    PyModuleDef_HEAD_INIT,
+    "shuffle", /* name of module */
+    "",          /* module documentation, may be NULL */
+    -1,          /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+    ShuffleMethods
+};
+
+PyMODINIT_FUNC PyInit_shuffle(void)
+{
+    return PyModule_Create(&cModPyShuffle);
+};
